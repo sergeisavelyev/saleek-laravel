@@ -12,6 +12,22 @@ const mix = require("laravel-mix");
  */
 
 mix.styles([
+   'resources/assets/admin/plugins/fontawesome-free/css/all.min.css',
+   'resources/assets/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css',
+   'resources/assets/admin/dist/css/adminlte.min.css',
+], 'public/assets/admin/css/main.css');
+
+mix.scripts([
+   'resources/assets/admin/plugins/jquery/jquery.min.js',
+   'resources/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js',
+   'resources/assets/admin/dist/js/adminlte.js',
+   'resources/assets/admin/dist/js/demo.js',
+], 'public/assets/admin/js/main.js');
+
+mix.copyDirectory('resources/assets/admin/dist/img', 'public/assets/admin/img');
+mix.copyDirectory('resources/assets/admin/plugins/fontawesome-free/webfonts', 'public/assets/admin/webfonts');
+
+mix.styles([
     'resources/assets/front/lib/animate/animate.min.css',
     'resources/assets/front/lib/owlcarousel/assets/owl.carousel.min.css',
     'resources/assets/front/css/style.css',
