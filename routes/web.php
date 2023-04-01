@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'MainController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::get('/', 'MainController@index')->name('home');
+    Route::get('/', 'MainController@index')->name('admin.home');
+    Route::resource('/products', 'ProductController');
 });
