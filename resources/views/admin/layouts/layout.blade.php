@@ -131,13 +131,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="./index2.html" class="nav-link">
+                                    <a href="{{ route('categories.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Список категорий</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./index.html" class="nav-link">
+                                    <a href="{{ route('categories.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Новая категория</p>
                                     </a>
@@ -162,6 +162,30 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session()->has('success'))
+                                <div class="alert alert-success">
+                                    <ul>
+                                        <li>{{ session('success') }}</li>
+                                    </ul>
+                                </div>
+                            @endif
+                        </div><!-- /.col -->
+                    </div>
+                </div>
+            </div>
             @yield('content')
         </div>
         <!-- /.content-wrapper -->
