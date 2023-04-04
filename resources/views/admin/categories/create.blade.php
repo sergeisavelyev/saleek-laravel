@@ -35,7 +35,7 @@
                                                     @foreach ($category->childrenCategories as $childCategory)
                                                         @include('admin.categories.select_child_category', [
                                                             'child_category' => $childCategory,
-                                                            'level' => ($level .= ' - '),
+                                                            'level' => ($level .= ' - - '),
                                                         ])
                                                     <?php $level = ''; ?>
                                                     @endforeach

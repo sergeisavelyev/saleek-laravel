@@ -51,42 +51,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td>
-                                            <i class="fas fa-pencil-alt"></i>
-                                            <i class="fas fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                        <td>
-                                            <i class="fas fa-pencil-alt"></i>
-                                            <i class="fas fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td>
-                                            <i class="fas fa-pencil-alt"></i>
-                                            <i class="fas fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td>
-                                            <i class="fas fa-pencil-alt"></i>
-                                            <i class="fas fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
+                                    @foreach ($allCategories as $category)
+                                        <tr>
+                                            <td>{{ $category->id }}</td>
+                                            <td>{{ $category->title }}</td>
+                                            <td>{{ $category->category_id }}</td>
+                                            <td>
+                                                <a href="{{ route('categories.edit', ['category' => $category->id]) }}"><i class="fas fa-pencil-alt mx-2"></i></a>
+                                                <a href="{{ route('categories.destroy', ['category' => $category->id]) }}"><i class="fas fa-trash-alt mx-2"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
