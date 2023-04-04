@@ -30,6 +30,7 @@
                         </div>
 
                         <div class="card-body table-responsive p-0">
+                            @if (count($products))
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
@@ -88,6 +89,9 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            @else
+                                <h1>Товаров пока нет.</h1>
+                            @endif
                         </div>
 
                     </div>

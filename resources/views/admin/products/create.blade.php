@@ -21,7 +21,7 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="title">Наименование товара</label>
-                                        <input class="form-control" id="title" name="title" placeholder="Наименование">
+                                        <input class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Наименование">
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Описание</label>
@@ -40,32 +40,23 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="category">Категория</label>
-                                        <select class="custom-select" name="category_id">
-                                            <optgroup label="Женская одежда">
-                                                <option value="1">Верхняя одежда</option>
-                                                <option value="1">- Куртки</option>
-                                                <option value="1">- Пальто</option>
-                                                <option value="2">Брюки</option>
-                                                <option value="3">Обувь</option>
-                                                <option value="3">- Кроссовки</option>
-                                                <option value="3">- Сапоги</option>
-                                                <option value="3">-- Короткие</option>
-                                                <option value="3">-- Длинные</option>
-                                            </optgroup>
-                                            <optgroup label="Мужскя одежда">
-                                                <option value="1">Верхняя одежда</option>
-                                                <option value="1">- Куртки</option>
-                                                <option value="1">- Пальто</option>
-                                                <option value="2">Брюки</option>
-                                                <option value="3">Обувь</option>
-                                                <option value="3">- Кроссовки</option>
-                                                <option value="3">- Сапоги</option>
-                                                <option value="3">Аксессуары</option>
-                                                <option value="3">- Головные уборы</option>
-                                                <option value="3">-- Шапки</option>
-                                                <option value="3">-- Кепки</option>
-                                            </optgroup>
+                                        <label for="category_id">Родительская категория</label>
+                                        <select class="form-control" name="category_id">
+                                            <?php $level = ''; ?>
+                                            <option selected disabled>Выберите категорию</option>
+                                            @isset($categories)
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    @foreach ($category->childrenCategories as $childCategory)
+                                                        @include('admin.categories.select_child_category', [
+                                                            'child_category' => $childCategory,
+                                                            'level' => ($level .= ' - - '),
+                                                        ])
+                                                    <?php $level = ''; ?>
+                                                    @endforeach
+                                                @endforeach
+                                            @endisset
+
                                         </select>
                                     </div>
                                     <div class="form-group">
