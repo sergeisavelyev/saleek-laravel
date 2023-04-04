@@ -43,50 +43,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                        <td>
-                                            <i class="fas fa-pencil-alt"></i>  
-                                            <i class="fas fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                        <td>
-                                            <i class="fas fa-pencil-alt"></i>  
-                                            <i class="fas fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                        <td>
-                                            <i class="fas fa-pencil-alt"></i>  
-                                            <i class="fas fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                        <td>
-                                            <i class="fas fa-pencil-alt"></i>  
-                                            <i class="fas fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
+                                    @foreach ($products as $product)
+                                        <tr>
+                                            <td>{{ $product->id }}</td>
+                                            <td>{{ $product->title }}</td>
+                                            <td>{{ $product->description }}</td>
+                                            <td>₽ {{ $product->price }}</td>
+                                            <td>{{ $product->category->title }}</td>
+                                            <td>
+                                                <a href="{{ route('products.edit', ['product' => $product->id]) }}"><i class="fas fa-pencil-alt"></i></a>
+                                                <i class="fas fa-trash-alt"></i>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             @else

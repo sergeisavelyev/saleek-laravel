@@ -40,14 +40,34 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Товар добавлен');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::whereNull('category_id')
+            ->with('childrenCategories')
+            ->get();
+        return view('admin.products.edit', compact('categories', 'product'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        return view('admin.products.update');
+        $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'price' => 'required|integer',
+        'category_id' => 'required',
+        'thumbnail' => 'nullable|image',
+        ]);
+
+        $product = Product::find($id);
+        $data = $request->all();
+
+        if ($file = Product::uploadImage($request, $product->thumbnail)) {
+            $data['thumbnail'] = $file;
+        }
+        $product->update($data);
+        
+        return redirect()->route('products.index')->with('success', 'Товар отредактирован');
     }
 
     public function destroy()

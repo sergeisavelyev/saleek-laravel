@@ -16,16 +16,17 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <form role="form" method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
+                            <form role="form" method="post" action="{{ route('products.update', ['product' => $product]) }}" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="title">Наименование товара</label>
-                                        <input class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Наименование">
+                                        <input class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Наименование" value="{{ $product->title }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Описание</label>
-                                        <textarea class="form-control @error('description') is-invalid @enderror" rows="3" name="description" placeholder="Описание..."></textarea>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" rows="3" name="description" placeholder="Описание...">{{ $product->description }}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="price">Цена</label>
@@ -33,7 +34,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">₽</span>
                                             </div>
-                                            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="price">
+                                            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="price" value="{{ $product->price }}">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">.00</span>
                                             </div>
@@ -46,7 +47,7 @@
                                             <option selected disabled>Выберите категорию</option>
                                             @isset($categories)
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    <option value="{{ $category->id }}" @if ($category->id == $product->category_id) selected @endif >{{ $category->title }}</option>
                                                     @foreach ($category->childrenCategories as $childCategory)
                                                         @include('admin.categories.select_child_category', [
                                                             'child_category' => $childCategory,

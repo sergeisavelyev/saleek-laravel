@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -26,9 +27,12 @@ class Product extends Model
         ];
     }
 
-    public static function uploadImage(Request $request)
+    public static function uploadImage(Request $request, $image = null)
     {
         if ($request->hasFile('thumbnail')) {
+            if ($image) {
+                Storage::delete($image);
+            }
             $folder = date('Y-m-d');
             return $request->file('thumbnail')->store("images/{$folder}");
         }
