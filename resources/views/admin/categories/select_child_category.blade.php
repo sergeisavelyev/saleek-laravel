@@ -1,3 +1,6 @@
+@isset($product)
+    <option value="{{$child_category->id}}"  @if ($child_category->id == $product->category_id) selected @endif>{{$level . $child_category->title}}</option>
+@endisset
 <option value="{{$child_category->id}}">{{$level . $child_category->title}}</option>
 @if ($child_category->categories)
     <?php $level .= ' - - ' ?>
