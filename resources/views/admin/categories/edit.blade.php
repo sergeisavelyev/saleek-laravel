@@ -26,7 +26,6 @@
                                         <input class="form-control" id="title" name="title" placeholder="Название" value="{{ $category->title }}">
                                     </div>
                                 </div>
-
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Изменить</button>
                                 </div>

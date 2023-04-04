@@ -57,8 +57,14 @@
                                             <td>{{ $category->title }}</td>
                                             <td>{{ $category->category_id }}</td>
                                             <td>
-                                                <a href="{{ route('categories.edit', ['category' => $category->id]) }}"><i class="fas fa-pencil-alt mx-2"></i></a>
-                                                <a href="{{ route('categories.destroy', ['category' => $category->id]) }}"><i class="fas fa-trash-alt mx-2"></i></a>
+                                                <a href="{{ route('categories.edit', ['category' => $category->id]) }}"><i class="fas fa-pencil-alt mx-2 float-left mt-2"></i></a>
+                                                <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post" class="float-left">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Подтвердите удаление')">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
