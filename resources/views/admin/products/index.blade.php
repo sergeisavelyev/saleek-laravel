@@ -51,8 +51,14 @@
                                             <td>₽ {{ $product->price }}</td>
                                             <td>{{ $product->category->title }}</td>
                                             <td>
-                                                <a href="{{ route('products.edit', ['product' => $product->id]) }}"><i class="fas fa-pencil-alt"></i></a>
-                                                <i class="fas fa-trash-alt"></i>
+                                                <a href="{{ route('products.edit', ['product' => $product->id]) }}"><i class="fas fa-pencil-alt mx-2 float-left mt-2"></i></a>
+                                                <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="post" class="float-left">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Подтвердите удаление')">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

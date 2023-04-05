@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -66,12 +67,16 @@ class ProductController extends Controller
             $data['thumbnail'] = $file;
         }
         $product->update($data);
-        
+
         return redirect()->route('products.index')->with('success', 'Товар отредактирован');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        Storage::delete($product->thumbnail);
+        $product->delete();
+        
+        return redirect()->route('products.index')->with('success', 'Товар удален');
     }
 }
