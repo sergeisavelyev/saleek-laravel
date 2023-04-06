@@ -38,6 +38,28 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+        ])) {
+            session()->flash('success', 'Вы вошли в аккаунт');
+            if (Auth::user()->is_admin) {
+                return redirect()->route('admin.home');
+            } else {
+                return redirect()->home();
+            }
+        };
+        return redirect()->back()->with('error', 'Логин/Пароль указан неверно');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->home();
     }
 }
